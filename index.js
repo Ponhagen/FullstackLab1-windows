@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const Dish = require("./models/dishModel");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,7 +11,7 @@ const connectionString = process.env.CONNECTION_URL;
 app.use(express.json());
 
 // Test to read from database
-app.get("api/dishes", async (req, res) => {
+app.get("/api/dishes", async (req, res) => {
   try {
     const dishes = await Dish.find();
     res.status(200).json(dishes);
