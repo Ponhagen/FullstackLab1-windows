@@ -10,7 +10,7 @@ const connectionString = process.env.CONNECTION_URL;
 app.use(express.json());
 
 // Test route
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
     res.send("API is working :)");
 })
 
@@ -25,8 +25,8 @@ mongoose
   .connect(connectionString)
   .then(() => {
     console.log("Ansluten till MongoDB");
-    app.listen(port, () => {
-      console.log(`Servern körs på http://localhost:${port}`);
+    app.listen(PORT, () => {
+      console.log(`Servern körs på http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
