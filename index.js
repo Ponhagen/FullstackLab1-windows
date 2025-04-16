@@ -9,6 +9,11 @@ const connectionString = process.env.CONNECTION_URL;
 // Middleware to read JSON-data
 app.use(express.json());
 
+// Test route
+app.get("/test", (req, res) => {
+    res.send("API is working :)");
+})
+
 
 
 
