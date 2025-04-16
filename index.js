@@ -9,10 +9,16 @@ const connectionString = process.env.CONNECTION_URL;
 // Middleware to read JSON-data
 app.use(express.json());
 
-// Test route
-app.get("/test", (req, res) => {
-    res.send("API is working :)");
-})
+// Test to read from database
+app.get("api/dishes", async (req, res) => {
+  try {
+    const dishes = await Dish.find();
+    res.status(200).json(dishes);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 
 
