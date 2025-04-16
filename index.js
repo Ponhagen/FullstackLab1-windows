@@ -10,7 +10,7 @@ const connectionString = process.env.CONNECTION_URL;
 app.use(express.json());
 
 // Test route
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
     res.send("API is working :)");
 })
 
