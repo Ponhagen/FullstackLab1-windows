@@ -25,7 +25,6 @@ app.get("api/dishes", async (req, res) => {
 
 
 
-
 // Connection to MongoDB
 mongoose
   .connect(connectionString)
