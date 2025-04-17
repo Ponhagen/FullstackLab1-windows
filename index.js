@@ -20,8 +20,25 @@ app.get("/api/dishes", async (req, res) => {
   }
 });
 
+app.get("/api/dishes/:id", async (req, res) => {
+  try {
+    const dish = await Dish.findById(req.params.id);
+    if (!dish) return res.status(404).json({ message: "Rätt hittades inte" });
+    res.status(200).json(dish);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-
+app.post("/api/dishes", async (req, res) => {
+  try {
+    const newDish = new Dish(req.body);
+    const savedDish = await newDish.save();
+    res.status(201).json(savedDish);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 
 
