@@ -19,6 +19,7 @@ app.get("/api/dishes", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+// Get a single dish by ID
 
 app.get("/api/dishes/:id", async (req, res) => {
   try {
@@ -30,6 +31,7 @@ app.get("/api/dishes/:id", async (req, res) => {
   }
 });
 
+// POST request to create a new dish
 app.post("/api/dishes", async (req, res) => {
   try {
     const newDish = new Dish(req.body);
@@ -39,6 +41,34 @@ app.post("/api/dishes", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+// PUT request to update a dish by ID
+app.put("/api/dishes/:id", async (req, res) => {
+  try {
+    const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!updatedDish) return res.status(404).json({ message: "Rätten hittades inte." });
+    res.json(updatedDish);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// DELETE request to delete a dish by ID
+app.delete("/api/dishes/:id", async (req, res) => {
+  try {
+    const deletedDish = await Dish.findByIdAndDelete(req.params.id);
+    if (!deletedDish) return res.status(404).json({ message: "Rätten hittades inte." });
+    res.json({ message: "Rätten har tagits bort." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
 
 
 
