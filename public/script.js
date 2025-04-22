@@ -28,4 +28,26 @@ async function getDish() {
     });
 }
 
+async function deleteDish(_id) {
+    const confirmDelete = confirm('Are you sure you want to delete this dish?');
+    if (!confirmDelete) return; {
+    try {
+        const response = await fetch(`/api/dishes/${_id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            alert('Dish deleted successfully');
+            getDish(); // Refresh the dish list
+        } else {
+            alert('Error deleting dish');
+        }
+    } catch (error) {
+        console.error('Error deleting dish:', error);
+        alert('Error deleting dish');
+    }
+}
+    
+}
+
 getDish();
