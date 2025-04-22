@@ -52,7 +52,7 @@ async function deleteDish(_id) {
     
 }
 async function updateDish(_id) {
-    fetch('/api/dishes/${_id}')
+    fetch(`/api/dishes/${_id}`)
     .then(res => res.json())
     .then(dish => {
         document.getElementById('dish-name').value = dish.name;
@@ -60,8 +60,47 @@ async function updateDish(_id) {
         document.getElementById('dish-preperationSteps').value = dish.preperationSteps.join(', ');
         document.getElementById('dish-cookingTime').value = dish.cookingTime;
         document.getElementById('dish-difficulty').value = dish.difficulty;
-dishtoEdit = _id; // Store the ID of the dish being updated
+        dishId = _id;
     })
 }
+
+document.getElementById('dish-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+  
+    const newDish = {
+      name: document.getElementById('dish-name').value,
+      ingredients: document.getElementById('dish-ingredients').value.split(','),
+      preperationSteps: document.getElementById('dish-preperationSteps').value.split(','),
+      cookingTime: parseInt(document.getElementById('dish-cookingTime').value),
+      difficulty: document.getElementById('dish-difficulty').value
+    };
+  
+    const url = dishId ? `/api/dishes/${dishId}` : '/api/dishes';
+    const method = dishId ? 'PUT' : 'POST';
+  
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newDish)
+      });
+  
+      if (response.ok) {
+        alert(dishId ? 'Dish updated!' : 'New course added!');
+        document.getElementById('dish-form').reset();
+        dishId = null;
+        document.querySelector('#dish-form button').textContent = 'Add Dish';
+        getDish();
+      } else {
+        alert('Something went wrong!');
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      alert('A error occured.');
+    }
+  });
+  
 
 getDish();
