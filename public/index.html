@@ -1,26 +1,52 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mina Rätter</title>
+    <title>My menu</title>
 </head>
 <body>
-    <h1>Mina Rätter</h1>
+    <h1>Recepies</h1>
 
     <table border="1">
-        <thread>
+        <thead>
             <tr>
                 <th>Name</th>
                 <th>Ingredients</th>
-                <th>Preperation steps</th>
+                <th>Preparation steps</th>
                 <th>Cooking time</th>
                 <th>Difficulty</th>
             </tr>
-        </thread>
-        <tbody id="dish-table-body"> </tbody>
+        </thead>
+        <tbody id="dish-table-body"></tbody>
     </table>
+
+    <section class="add-dish-form">
+        <h2>Add a new dish</h2>
+        <form id="dish-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" required></textarea>
+
+            <label for="steps">Preparation Steps:</label>
+            <textarea id="steps" required></textarea>
+
+            <label for="time">Cooking Time:</label>
+            <input type="text" id="time" required>
+
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" required>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <button type="submit">Add Dish</button>
+        </form>
+    </section>
+
     <script src="script.js"></script>
-    
 </body>
 </html>
