@@ -9,6 +9,7 @@ const connectionString = process.env.CONNECTION_URL;
 
 // Middleware to read JSON-data
 app.use(express.json());
+app.use(express.static('public'));
 
 // Test to read from database
 app.get("/api/dishes", async (req, res) => {
@@ -66,12 +67,6 @@ app.delete("/api/dishes/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
-
-
-
-
 
 // Connection to MongoDB
 mongoose
