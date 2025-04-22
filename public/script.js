@@ -1,3 +1,5 @@
+let dishId = null; // Variable to store the ID of the dish being updated
+
 async function getDish() {
   const response = await fetch("/api/dishes", {
         headers: {
@@ -48,6 +50,18 @@ async function deleteDish(_id) {
     }
 }
     
+}
+async function updateDish(_id) {
+    fetch('/api/dishes/${_id}')
+    .then(res => res.json())
+    .then(dish => {
+        document.getElementById('dish-name').value = dish.name;
+        document.getElementById('dish-ingredients').value = dish.ingredients.join(', ');
+        document.getElementById('dish-preperationSteps').value = dish.preperationSteps.join(', ');
+        document.getElementById('dish-cookingTime').value = dish.cookingTime;
+        document.getElementById('dish-difficulty').value = dish.difficulty;
+dishtoEdit = _id; // Store the ID of the dish being updated
+    })
 }
 
 getDish();
